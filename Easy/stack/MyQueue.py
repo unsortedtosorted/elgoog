@@ -1,0 +1,71 @@
+from collections import *
+class MyQueue(object):
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.pushs =[]
+        self.pops  =[]
+
+    def push(self, x):
+        """
+        Push element x to the back of queue.
+        :type x: int
+        :rtype: void
+        """
+        self.pushs.append(x)
+        
+        
+
+    def pop(self):
+        """
+        Removes the element from in front of queue and returns that element.
+        :rtype: int
+        """
+        while len(self.pushs)>1:
+            self.pops.append(self.pushs.pop())
+        
+        r=self.pushs.pop()
+        
+        while len(self.pops)>0:
+            self.pushs.append(self.pops.pop())
+        self.pops=[]
+        return r
+            
+        
+
+    def peek(self):
+        """
+        Get the front element.
+        :rtype: int
+        """
+        while len(self.pushs)>1:
+            self.pops.append(self.pushs.pop())
+        
+        r=self.pushs.pop()
+        
+        self.pushs.append(r)
+        while len(self.pops)>0:
+            self.pushs.append(self.pops.pop())
+        self.pops=[]
+        return r
+        
+        return r
+        
+
+    def empty(self):
+        """
+        Returns whether the queue is empty.
+        :rtype: bool
+        """
+        return len(self.pushs)==0
+        
+
+
+# Your MyQueue object will be instantiated and called as such:
+# obj = MyQueue()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.peek()
+# param_4 = obj.empty()
