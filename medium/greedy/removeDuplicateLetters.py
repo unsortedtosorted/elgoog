@@ -1,4 +1,8 @@
+
+
 """
+#316
+
 Basic algo:
     1. Create a sorted list withh following rule:
         1.1 if current char is greater than last char in list add it to the list
@@ -7,6 +11,8 @@ Basic algo:
                 - list size is greater than 0
                 - the occurence of last character is more than 0
                 - the last character is not smaller than current char
+                
+    Run Time: O(N)+ O(26) + O(N) = O(N)
 """
 
 class Solution:
