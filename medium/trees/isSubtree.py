@@ -1,3 +1,19 @@
+"""
+
+#572. Subtree of Another Tree
+
+1. Do DFS of first Tree, if node equal to root of another tree, do preorder
+traversal together and return if True if traversal is same
+
+2. if no Node is equal to root of another tree , return False
+
+RunTime : O (N*M)
+
+
+
+"""
+
+
 class Solution:
     def isSubtree(self, s, t):
         """
