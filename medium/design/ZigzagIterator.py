@@ -5,7 +5,6 @@
 
 """
 
-from collections import deque
 class ZigzagIterator(object):
 
     def __init__(self, v1, v2):
@@ -15,33 +14,48 @@ class ZigzagIterator(object):
         :type v2: List[int]
         """
         
-        self.q = deque()
-        v1 = v1[::-1]
-        v2 = v2[::-1]
-        while len(v1)>0 and len(v2)>0:
-            self.q.append(v1.pop())
-            self.q.append(v2.pop())
+        self.i=0
+        self.j=0
+        self.v1=v1
+        self.v2=v2
+        self.lastv1=False
         
-        if len(v1)>0:
-            while len(v1)>0:
-                self.q.append(v1.pop())
-        else:
-            while len(v2)>0:
-                self.q.append(v2.pop())
-                
-        print (self.q)
+        
 
     def next(self):
         """
         :rtype: int
         """
-        return self.q.popleft()
+        if self.lastv1:
+            if self.j<len(self.v2):
+                temp = self.v2[self.j]
+                self.j+=1
+               
+            else:
+                temp = self.v1[self.i]
+                self.i+=1
+            self.lastv1=False    
+            return temp
+        else:
+            if self.i<len(self.v1):
+                temp = self.v1[self.i]
+                self.i+=1
+                
+            else:
+                temp = self.v2[self.j]
+                self.j+=1
+                
+
+            self.lastv1=True
+            return temp
+            
+        
 
     def hasNext(self):
         """
         :rtype: bool
         """
-        return len(self.q)>0
+        return self.i<len(self.v1) or self.j<len(self.v2)
         
 
 # Your ZigzagIterator object will be instantiated and called as such:
