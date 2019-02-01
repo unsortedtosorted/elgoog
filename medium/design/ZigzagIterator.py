@@ -2,7 +2,6 @@
 281. Zigzag Iterator
 
 
-
 """
 
 class ZigzagIterator(object):
@@ -14,11 +13,21 @@ class ZigzagIterator(object):
         :type v2: List[int]
         """
         
-        self.i=0
-        self.j=0
-        self.v1=v1
-        self.v2=v2
-        self.lastv1=False
+        self.data=[]
+        x=-1
+        for x in range(0,min(len(v1),len(v2))):
+            self.data.append(v1[x])
+            self.data.append(v2[x])
+        
+        if x == len(v1)-1:
+            for y in range(x+1,len(v2)):
+                self.data.append(v2[y])
+        else:
+            for y in range(x+1,len(v1)):
+                self.data.append(v1[y])
+        
+        self.iter=0
+            
         
         
 
@@ -26,28 +35,9 @@ class ZigzagIterator(object):
         """
         :rtype: int
         """
-        if self.lastv1:
-            if self.j<len(self.v2):
-                temp = self.v2[self.j]
-                self.j+=1
-               
-            else:
-                temp = self.v1[self.i]
-                self.i+=1
-            self.lastv1=False    
-            return temp
-        else:
-            if self.i<len(self.v1):
-                temp = self.v1[self.i]
-                self.i+=1
-                
-            else:
-                temp = self.v2[self.j]
-                self.j+=1
-                
-
-            self.lastv1=True
-            return temp
+        temp= self.data[self.iter]
+        self.iter+=1
+        return temp
             
         
 
@@ -55,9 +45,4 @@ class ZigzagIterator(object):
         """
         :rtype: bool
         """
-        return self.i<len(self.v1) or self.j<len(self.v2)
-        
-
-# Your ZigzagIterator object will be instantiated and called as such:
-# i, v = ZigzagIterator(v1, v2), []
-# while i.hasNext(): v.append(i.next())
+        return self.iter<len(self.data)
